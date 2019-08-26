@@ -1,0 +1,30 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 60, in script
+    $ get_achievement("VIP", trans=achievement_transform)
+  File "game/script.rpy", line 60, in <module>
+    $ get_achievement("VIP", trans=achievement_transform)
+  File "game/achievement.rpy", line 66, in get_achievement
+    ach = persistent.achievements_dict[ach_id]
+KeyError: u'*VIP*'
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 60, in script
+    $ get_achievement("VIP", trans=achievement_transform)
+  File "/Users/Stefano/Desktop/renpy-7.3.2-sdk/renpy/ast.py", line 912, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/Users/Stefano/Desktop/renpy-7.3.2-sdk/renpy/python.py", line 2004, in py_exec_bytecode
+    exec bytecode in globals, locals
+  File "game/script.rpy", line 60, in <module>
+    $ get_achievement("VIP", trans=achievement_transform)
+  File "game/achievement.rpy", line 66, in get_achievement
+    ach = persistent.achievements_dict[ach_id]
+KeyError: u'*VIP*'
+
+Darwin-18.5.0-x86_64-i386-64bit
+Ren'Py 7.3.2.320
+MikuFan 1.0
+Mon Aug 26 12:20:48 2019

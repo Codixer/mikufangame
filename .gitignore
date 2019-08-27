@@ -1,6 +1,5 @@
 
+game/saves/*
 game/saves/
 
 *.save
-
-game/

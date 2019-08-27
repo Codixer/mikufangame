@@ -2,9 +2,10 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 75: expected statement.
-    p == "..."
-      ^
+File "game/script.rpy", line 126: invalid syntax
+    jump intro_start
+                    ^
+    
 
 Ren'Py Version: Ren'Py 7.3.2.320
-Mon Aug 26 14:15:11 2019
+Mon Aug 26 21:06:51 2019

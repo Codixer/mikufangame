@@ -1,5 +1,50 @@
-﻿# The script of the game goes in this file.
 
+init -20 python:
+    if renpy.mobile != True:
+        import discord_rpc
+        import time
+
+        def readyCallback(current_user):
+            print('Our user: {}'.format(current_user))
+
+        def disconnectedCallback(codeno, codemsg):
+            print('Disconnected from Discord rich presence RPC. Code {}: {}'.format(
+                codeno, codemsg
+            ))
+
+        def errorCallback(errno, errmsg):
+            print('An error occurred! Error {}: {}'.format(
+                errno, errmsg
+            ))
+    if renpy.mobile == True:
+        print('Disabled discord RPC. Not supported on mobile!')
+
+
+
+label before_main_menu:
+    if renpy.mobile != True:
+        python:
+            # Note: 'event_name': callback
+            callbacks = {
+                'ready': readyCallback,
+                'disconnected': disconnectedCallback,
+                'error': errorCallback,
+            }
+            discord_rpc.initialize('564432578803662848', callbacks=callbacks, log=False)
+            start = time.time()
+            print(start)
+            discord_rpc.update_connection()
+            discord_rpc.run_callbacks()
+            discord_rpc.update_presence(
+                **{
+                    'details': 'Main Menu',
+                    'start_timestamp': start,
+                    'large_image_key': 'miku_logo'
+                }
+            )
+            discord_rpc.update_connection()
+            discord_rpc.run_callbacks()
+return
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
@@ -54,7 +99,37 @@ init python:
             else:
                 return False
 
+
 label start:
+    if renpy.mobile != True:
+        "Nice, you're playing on a PC. Discord RPC has been enabled! Look in your account :P"
+        python:
+            callbacks = {
+                'ready': readyCallback,
+                'disconnected': disconnectedCallback,
+                'error': errorCallback,
+            }
+            discord_rpc.initialize('564432578803662848', callbacks=callbacks, log=False)
+            start = time.time()
+            discord_rpc.update_connection()
+            discord_rpc.run_callbacks()
+            discord_rpc.update_presence(
+                **{
+                    'details': 'Looking at Miku',
+                    'state': 'Hidden away',
+                    'large_image_key': 'miku_logo',
+                    'start_timestamp': start
+                }
+            )
+
+            discord_rpc.update_connection()
+            discord_rpc.run_callbacks()
+
+        jump intro_start
+    if renpy.mobile == True:
+        jump intro_start
+
+label intro_start:
     $ the_player = Player()
     menu:
         "Did you see the credits?"
@@ -107,6 +182,33 @@ label game_start:
             $ msg.msg("{color=#808080}You've acquired a {color=#FFD700}VIP {color=#808080}pass!")
             hide miku wave with dissolve
             "..."
+            scene black
+            if renpy.mobile != True:
+                "You walk to the concert, and find out other people know you've gotten a VIP pass. (Look at your discord)"
+                python:
+                    callbacks = {
+                        'ready': readyCallback,
+                        'disconnected': disconnectedCallback,
+                        'error': errorCallback,
+                    }
+                    discord_rpc.initialize('564432578803662848', callbacks=callbacks, log=False)
+                    start = time.time()
+                    discord_rpc.update_connection()
+                    discord_rpc.run_callbacks()
+                    discord_rpc.update_presence(
+                        **{
+                            'details': 'Got a FREE VIP Pass!',
+                            'state': 'Suprised :O',
+                            'large_image_key': 'miku_logo',
+                            'start_timestamp': start
+                        }
+                    )
+
+                    discord_rpc.update_connection()
+                    discord_rpc.run_callbacks()
+
+
+
         "No, I can't I'm in a hurry.":
             $ msg.msg("{color=#61baca}Miku {color=#808080}will remember this!")
             $ p = "..."
@@ -114,18 +216,6 @@ label game_start:
             p "No, sorry I can't help you right now. I'm in a hurry."
             m "{color=#FF0000}Fine, I'll leave then."
             "Quietly, you regret this decision."
-
-    "[the_player.player_name] helped Miko?"
-
-    if the_player.get_choice("helped_miko"):
-        "Yes [the_player.player_name] helped Miko"
-        $ the_player.set_choice("tile","Miko Supporter")
-    else:
-        "No [the_player.player_name] helped Miko"
-        $ the_player.set_choice("tile","Do not want to support Miko")
-
-    $ title = the_player.get_choice("tile")
-
-    "So your current Tile is [title]"
-
+    scene bg concert night
+    "Apple"
 return

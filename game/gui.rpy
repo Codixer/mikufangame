@@ -48,8 +48,8 @@ define gui.muted_color = '#003d51'
 define gui.hover_muted_color = '#005b7a'
 
 ## The colors used for dialogue and menu choice text.
-define gui.text_color = '#ffffff'
-define gui.interface_text_color = '#ffffff'
+define gui.text_color = '#000000'
+define gui.interface_text_color = '#000000'
 
 
 ## Fonts and Font Sizes ########################################################
@@ -425,7 +425,7 @@ init python:
 
         ## Font sizes.
         gui.text_size = 45
-        gui.name_text_size = 54
+        gui.name_text_size = 55
         gui.notify_text_size = 38
         gui.interface_text_size = 45
         gui.button_text_size = 45
@@ -433,7 +433,7 @@ init python:
 
         ## Adjust the location of the textbox.
         gui.textbox_height = 360
-        gui.name_xpos = 120
+        gui.name_xpos = 110
         gui.text_xpos = 135
         gui.text_width = 1650
 
@@ -458,7 +458,7 @@ init python:
         gui.nvl_height = 255
 
         gui.nvl_name_width = 458
-        gui.nvl_name_xpos = 488
+        gui.nvl_name_xpos = 470
 
         gui.nvl_text_width = 1373
         gui.nvl_text_xpos = 518

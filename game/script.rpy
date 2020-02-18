@@ -136,7 +136,7 @@ label intro_start:
         "Yes":
             jump game_start
         "No":
-            show dev eyes closed with dissolve
+            show eyes_closed with dissolve
             "Welcome player!"
             "We know you want to start playing the game, but first. Please listen to this message."
             show mikufan at my_top_left with dissolve
@@ -146,7 +146,7 @@ label intro_start:
             "Also: Please have some credit to the people that helped us to make the game as it is now:"
             "Tanix#5876 - Developer\nStefano#7366 - Developer"
             "And now, lets play the game!"
-            hide dev eyes closed with dissolve
+            hide eyes_closed with dissolve
             hide mikufan at my_top_left with dissolve
             hide mikufan_banner at my_bottom_left with dissolve
             jump game_start
